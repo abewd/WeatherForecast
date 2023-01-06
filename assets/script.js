@@ -44,4 +44,73 @@ function initCityList() {
   renderCities();
 }
 
-// T
+// This function will retrieve the city into the local storage
+// and display it on the weather forecast
+
+function initWeather() {
+  var storedWeather = json.parse(localStorage.getItem("currentCity"));
+
+  // If storedWeather are not equal to null, then input all the cityName elements into storedWeather
+  if (storedWeather !== null) {
+    cityName = storedWeather;
+
+    // These functions will display the weather and the forecast
+    // I have no idea why theyre here...
+    displayWeather();
+    displayFiveDayForecast();
+  }
+}
+
+// This function will save the city into the local storage
+
+function storeCityArray() {
+  // Difference between parse and stringify?
+  // A: stringify turns JS into JSON
+  localStorage.setItem("cities", JSON.stringify(cityName));
+}
+
+// Convert the click into a search for city function
+$("#citySearchBtn").on("click", function (event) {
+  // This will allow the event to be cancelled if it does not complete itself
+  event.preventDefault();
+
+  // .val() = Counts the numbers of elements in a string
+  // .trim() = Remvoes whitespace
+  // inserting cityInput into the cityName and checking to see if it exists in the localStorage
+  cityName = $("#cityInput").val().trim();
+  // if the cityName is empty
+  if (cityName === "") {
+    alert("Please Enter A City Name");
+  } else if (cityList.length >= 5) {
+    cityList.shift();
+    cityList.push(cityname);
+  } else {
+    cityList.push(cityname);
+  }
+  storeCurrentCity();
+  storeCityArray();
+  renderCities();
+  displayWeather();
+  displayFiveDayForecast();
+});
+
+// Advancing the Open Weather API AJAX CALL and displaying the current city, weather, forecast 
+
+// Creating a variable which contains the API key 
+var APIkey = 811dae424e8d1fb5ea1b2108129389bd;
+
+
+async function displayWeather () {
+    var queryURL = "api.openweathermap.org/data/2.5/weather?q="+
+    cityName+"&units=metric&appid="+APIkey;
+
+    // send HTTP request to server 
+    var response = await $.ajax({
+        url: queryURL,
+        method: "GET",
+    });
+    console.log(response);
+
+    
+
+}
