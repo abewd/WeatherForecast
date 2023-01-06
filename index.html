@@ -30,43 +30,45 @@
         <h1>Weather Dashbaord</h1>
       </div>
     </header>
-    <!-- Main Content For The Page -->
+
+    <!-- Main Content Container -->
     <div class="mainContent">
-      <!-- Search Bar Bootstrap -->
-      <div class="citySearch">
-        <a>Search For A City: </a>
-      </div>
+      <!-- Main Content Row -->
+      <div class="row">
+        <!-- City Search -->
+        <div class="col-7 searchCol">
+          <!-- Search Button -->
+          <div class="searchText">
+            <h4>Search For A City:</h4>
+          </div>
+          <div class="input-group mb-5">
+            <input
+              type="text"
+              class="form-control"
+              id="cityInput"
+              placeholder="San Diego"
+            />
+          </div>
+          <!-- Search Button -->
+          <div class="searchButton">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              id="citySearchBtn"
+            >
+              🔎SEARCH🔎
+            </button>
+          </div>
 
-      <div class="input-group">
-        <input
-          type="Search"
-          class="form-control rounded"
-          placeholder="San Diego"
-          aria-label="Search"
-          aria-describedby="search-addon"
-        />
-      </div>
-
-      <!-- Magnification logo is an Emoji -->
-      <div class="searchBar">
-        <button type="button" class="btn btn-outline-primary">
-          🔎 S E A R C H 🔎
-        </button>
-      </div>
-      <!-- This is where the forecast will be displayed -->
-      <!-- Display 5 day forecast here: -->
-
-      <div class="col-md-8">
-        <div class="d-flex flex-column">
-          <div class="p-2"><h1>5-Day Forecast</h1></div>
-          <div id="five-day" class="row"></div>
+          <!-- City Table List -->
+          <div class="list-group" id="cityList"></div>
         </div>
-      </div>
 
-      <!-- Weather Information Column -->
-      <div class="col-9">
-        <div class="card" style="width: 100%" id="weatherContainer"></div>
-        <div id="forecastContainer"></div>
+        <!-- Weather Information Column -->
+        <div class="col-9">
+          <div class="card" style="width: 100%" id="weatherContainer"></div>
+          <div id="forecastContainer"></div>
+        </div>
       </div>
     </div>
   </head>

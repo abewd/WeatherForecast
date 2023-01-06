@@ -26,3 +26,11 @@ header {
   justify-content: left;
   display: flex;
 }
+
+.searchButton {
+  margin: 15px;
+}
+
+.searchText {
+  margin: 15px;
+}
