@@ -71,6 +71,7 @@ function storeCityArray() {
 
 // Convert the click into a search for city function
 $("#citySearchBtn").on("click", function (event) {
+  console.log("testBUtton");
   // This will allow the event to be cancelled if it does not complete itself
   event.preventDefault();
 
@@ -222,3 +223,5 @@ function historyDisplayWeather() {
 }
 
 $(document).on("click", ".city", historyDisplayWeather);
+
+console.log("test");
