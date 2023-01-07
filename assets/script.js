@@ -35,12 +35,12 @@ function initCityList() {
   // storedCities is equal to items from teh local storage in "cities"
   // JSON.parse is in simple terms, changing language JSON to JS
   // JSON === JavsScriptObjectNotation
-  var storedCities = JSON.parse(localStorage.getItem("cities"));
+  //   var storedCities = JSON.parse(localStorage.getItem("cities"));
 
-  // if the storedCities are not equal to null, then input all cityList list into storedCities
-  if (storedCities !== null) {
-    cityList = storedCities;
-  }
+  //   // if the storedCities are not equal to null, then input all cityList list into storedCities
+  //   if (storedCities !== null) {
+  //     cityList = storedCities;
+  //   }
   renderCities();
 }
 
@@ -63,7 +63,8 @@ function initWeather() {
 
 // This function will save the city into the local storage
 function storeCurrentCity() {
-  localStorage.setItem("currentCity", JSON.stringify(cityName));
+  //   localStorage.setItem("currentCity", JSON.stringify(cityName));
+  localStorage.setItem("cities", JSON.stringify(cityList.push(cityName)));
 }
 
 function storeCityArray() {
@@ -106,7 +107,7 @@ $("#citySearchBtn").on("click", function (event) {
 
 async function displayWeather() {
   var queryURL =
-    "api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
     "&units=metric&appid=811dae424e8d1fb5ea1b2108129389bd";
 
@@ -153,7 +154,7 @@ async function displayWeather() {
   var getLat = response.coord.lat;
 
   var uvURL =
-    "https://api.openweathermap.org/data/2.5/uvi?appid=d3b85d453bf90d469c82e650a0a3da26&lat" +
+    "https://api.openweathermap.org/data/2.5/uvi?appid=d3b85d453bf90d469c82e650a0a3da26&lat=" +
     getLat +
     "&lon=" +
     getLong;
