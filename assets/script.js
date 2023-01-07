@@ -26,7 +26,7 @@ function renderCities() {
     a.attr("data-name", cityList[i]);
     a.text(cityList[i]);
     // prepend will add multiple elements to the cityList function from a
-    $("#cityList").preprnd(a);
+    $("#cityList").prepend(a);
   }
 }
 
@@ -62,6 +62,9 @@ function initWeather() {
 }
 
 // This function will save the city into the local storage
+function storeCurrentCity() {
+  localStorage.setItem("currentCity", JSON.stringify(cityName));
+}
 
 function storeCityArray() {
   // Difference between parse and stringify?
@@ -82,11 +85,12 @@ $("#citySearchBtn").on("click", function (event) {
   // if the cityName is empty
   if (cityName === "") {
     alert("Please Enter A City Name");
-  } else if (cityList.length >= 5) {
-    cityList.shift();
-    cityList.push(cityname);
-  } else {
-    cityList.push(cityname);
+    // this section of the code isnt working very well...
+    //   } else if (cityList.length >= 5) {
+    //     cityList.shift();
+    //     cityList.push(cityName);
+    //   } else {
+    //     cityList.push(cityName);
   }
   storeCurrentCity();
   storeCityArray();
@@ -149,7 +153,7 @@ async function displayWeather() {
   var getLat = response.coord.lat;
 
   var uvURL =
-    "https://api.openweathermap.org/data/2.5/uvi?appid=d3b85d453bf90d469c82e650a0a3da26&lat=" +
+    "https://api.openweathermap.org/data/2.5/uvi?appid=d3b85d453bf90d469c82e650a0a3da26&lat" +
     getLat +
     "&lon=" +
     getLong;
@@ -162,9 +166,10 @@ async function displayWeather() {
 async function displayFiveDayForecast() {
   var queryURL =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
-    cityname +
-    "&units=imperial&appid=d3b85d453bf90d469c82e650a0a3da26";
+    cityName +
+    "&units=metric&appid=d3b85d453bf90d469c82e650a0a3da26";
 
+  // Awaits response from the API
   var response = await $.ajax({
     url: queryURL,
     method: "GET",
@@ -197,7 +202,7 @@ async function displayFiveDayForecast() {
     var displayWeatherIcon = $(
       "<img src = http://openweathermap.org/img/wn/" +
         getCurrentWeatherIcon +
-        ".png />"
+        "@2x.png />"
     );
     cardBody.append(displayWeatherIcon);
     var getTemp = response.list[i].main.temp;
@@ -216,10 +221,10 @@ async function displayFiveDayForecast() {
 
 // This function is used to pass the city in the history list to the displayWeather function
 function historyDisplayWeather() {
-  cityname = $(this).attr("data-name");
+  cityName = $(this).attr("data-name");
   displayWeather();
   displayFiveDayForecast();
-  console.log(cityname);
+  console.log(cityName);
 }
 
 $(document).on("click", ".city", historyDisplayWeather);
