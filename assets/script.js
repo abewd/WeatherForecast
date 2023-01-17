@@ -226,15 +226,3 @@ async function displayFiveDayForecast() {
   }
   $("#forecastContainer").html(forecastDiv);
 }
-
-// This function is used to pass the city in the history list to the displayWeather function
-function historyDisplayWeather() {
-  cityName = $(this).attr("data-name");
-  displayWeather();
-  displayFiveDayForecast();
-  console.log(cityName);
-}
-
-$(document).on("click", ".city", historyDisplayWeather);
-
-console.log("test");
