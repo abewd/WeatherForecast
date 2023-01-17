@@ -183,6 +183,10 @@ async function displayFiveDayForecast() {
   var cardDeck = $("<div  class='card-deck'>");
   forecastDiv.append(cardDeck);
 
+  // Display the weather and the city along with the date, you can adjust dates here
+  // and how its displayed
+  // It is in this format right now
+  // MONTH/DATE/YEAR
   console.log(response);
   for (i = 0; i < 5; i++) {
     var forecastCard = $("<div class='card mb-3 mt-3'>");
@@ -197,6 +201,7 @@ async function displayFiveDayForecast() {
       date.getFullYear();
     var forecastDate = $("<h5 class='card-title'>").text(val);
 
+    // Link API for top section of the page
     cardBody.append(forecastDate);
     var getCurrentWeatherIcon = response.list[i].weather[0].icon;
     console.log(getCurrentWeatherIcon);
@@ -205,9 +210,11 @@ async function displayFiveDayForecast() {
         getCurrentWeatherIcon +
         "@2x.png />"
     );
+
+    // Display info in the top section of the page
     cardBody.append(displayWeatherIcon);
     var getTemp = response.list[i].main.temp;
-    var tempEl = $("<p class='card-text'>").text("Temp: " + getTemp + "° F");
+    var tempEl = $("<p class='card-text'>").text("Temp: " + getTemp + "° C");
     cardBody.append(tempEl);
     var getHumidity = response.list[i].main.humidity;
     var humidityEl = $("<p class='card-text'>").text(
